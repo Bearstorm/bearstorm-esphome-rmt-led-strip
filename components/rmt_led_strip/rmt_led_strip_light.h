@@ -7,7 +7,7 @@
 namespace esphome {
 namespace rmt_led_strip {
 
-class RMTLedStripLight : public light::AddressableLight {
+class RMTLedStripLight : public light::AddressableLight, public Component {
  public:
   void setup() override;
 
