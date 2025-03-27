@@ -7,7 +7,7 @@ namespace rmt_led_strip {
 static const char *const TAG = "rmt_led_strip";
 
 void RMTLedStripLight::setup() {
-  ESP_LOGI(TAG, "Initializing RMT LED Strip on pin %d with %d LEDs", pin_->get_pin(), num_leds_);
+  ESP_LOGI(TAG, "Setting up RMT LED Strip on pin %d with %d LEDs", pin_->get_pin(), num_leds_);
 
   this->effects_.reserve(4);
   this->addressable_traits_.set_max_power_color(255, 255, 255);
@@ -18,17 +18,12 @@ void RMTLedStripLight::setup() {
 }
 
 void RMTLedStripLight::write_state(light::LightState *state) {
-  auto call = state->current_values;
-  float r = call.get_red();
-  float g = call.get_green();
-  float b = call.get_blue();
-  float brightness = call.get_brightness();
+  float r, g, b;
+  state->current_values_as_rgb(&r, &g, &b);
+  ESP_LOGD(TAG, "Setting color R:%.2f G:%.2f B:%.2f", r, g, b);
 
-  ESP_LOGD(TAG, "Setting LED color R:%.2f G:%.2f B:%.2f Brightness: %.2f", r, g, b, brightness);
-
-  // Tu môžeš neskôr pridať kód pre posielanie dát do pásika cez RMT
-
-  // Zatiaľ žiadna RMT logika – len debug info
+  // TODO: implement RMT writing here
+  // This is where you'd send the color to your LEDs using RMT
 }
 
 }  // namespace rmt_led_strip
