@@ -22,7 +22,8 @@ CONFIG_SCHEMA = light.ADDRESSABLE_LIGHT_SCHEMA.extend({
 
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
-    await light.register_light(var, config)
+    await light.register_light(var, config, addressable=True)
+
 
     pin = await cg.gpio_pin_expression(config[CONF_PIN])
     cg.add(var.set_pin(pin))
