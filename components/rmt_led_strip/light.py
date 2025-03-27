@@ -1,8 +1,7 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import light
-from esphome.const import CONF_ID, CONF_PIN, CONF_NAME, CONF_NUM_LEDS
-
+from esphome.const import CONF_ID, CONF_PIN, CONF_NUM_LEDS, CONF_NAME
 from esphome import pins
 
 AUTO_LOAD = ["light"]
