@@ -10,21 +10,22 @@ static const char *const TAG = "rmt_led_strip";
 void RMTLedStripLight::setup() {
   ESP_LOGI(TAG, "Setting up RMT LED Strip on pin %d with %d LEDs", pin_->get_pin(), num_leds_);
 
-  // Nastavenie základných vlastností svetla
+  // Nastavenie vlastností pásika (traits)
   this->addressable_traits_.set_supports_rgb(true);
   this->addressable_traits_.set_supports_brightness(true);
   this->addressable_traits_.set_supports_effects(true);
   this->addressable_traits_.set_max_power_color(255, 255, 255);
 
-  // Povinné pre správne rozpoznanie ESPHome
+  // ⚠️ Kritické pre ESPHome – registruje výstup ako light::LightState
   this->set_traits(this->addressable_traits_);
 
-  // Počet LED diód
+  // Nastavenie počtu pixelov (pre efekty a zápis)
   this->set_light_output_count(this->num_leds_);
 
-  // Efekty (možno neskôr rozšíriť)
+  // Predpriprav efektové sloty (napr. "Pulse", "Scan", atď.)
   this->effects_.reserve(4);
 }
+
 
 light::AddressableLightTraits RMTLedStripLight::get_traits() {
   return this->addressable_traits_;
