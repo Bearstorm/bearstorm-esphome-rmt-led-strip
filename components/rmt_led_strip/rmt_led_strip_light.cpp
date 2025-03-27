@@ -8,7 +8,7 @@ namespace rmt_led_strip {
 static const char *const TAG = "rmt_led_strip";
 
 void RMTLedStripLight::setup() {
-  ESP_LOGI(TAG, "Initializing LED strip on pin %d, %d LEDs", pin_->get_pin(), num_leds_);
+  ESP_LOGI(TAG, "Setting up RMT LED Strip on pin %d, %d LEDs", pin_->get_pin(), num_leds_);
 
   this->effects_.reserve(4);
   this->addressable_traits_.set_max_power_color(255, 255, 255);
@@ -23,7 +23,7 @@ void RMTLedStripLight::write_state(light::LightState *state) {
   auto color = state->current_values.get_color();
   float brightness = state->current_values.get_brightness();
 
-  ESP_LOGD(TAG, "Setting color: R=%.2f G=%.2f B=%.2f (Brightness %.2f)",
+  ESP_LOGD(TAG, "Updating LEDs with color: R=%.2f G=%.2f B=%.2f Brightness=%.2f",
            color.red, color.green, color.blue, brightness);
 
   for (int i = 0; i < this->size(); i++) {
