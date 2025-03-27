@@ -10,7 +10,7 @@ namespace rmt_led_strip {
 class RMTLedStripLight : public light::AddressableLight {
  public:
   void setup() override;
-  void write_state(light::LightState *state) override;
+  void write_state(light::LightState *state) override;  // 💡 Dôležité pre light.turn_on
 
   void set_pin(GPIOPin *pin) { pin_ = pin; }
   void set_num_leds(uint16_t num_leds) { num_leds_ = num_leds; }
