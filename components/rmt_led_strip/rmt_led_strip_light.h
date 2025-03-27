@@ -10,13 +10,14 @@ namespace rmt_led_strip {
 class RMTLedStripLight : public light::AddressableLight {
  public:
   void setup() override;
+  light::AddressableLightTraits get_traits() override;
   void write_state(light::LightState *state) override;
 
-  void set_pin(GPIOPin *pin) { pin_ = pin; }
-  void set_num_leds(uint16_t num_leds) { num_leds_ = num_leds; }
-  void set_chipset(const std::string &chipset) { chipset_ = chipset; }
-  void set_rgb_order(const std::string &order) { rgb_order_ = order; }
-  void set_rmt_channel(uint8_t channel) { rmt_channel_ = channel; }
+  void set_pin(GPIOPin *pin) { this->pin_ = pin; }
+  void set_num_leds(uint16_t num_leds) { this->num_leds_ = num_leds; }
+  void set_chipset(const std::string &chipset) { this->chipset_ = chipset; }
+  void set_rgb_order(const std::string &order) { this->rgb_order_ = order; }
+  void set_rmt_channel(uint8_t channel) { this->rmt_channel_ = channel; }
 
  protected:
   GPIOPin *pin_;
