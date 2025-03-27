@@ -30,4 +30,3 @@ async def to_code(config):
     cg.add(var.set_chipset(config["chipset"]))
     cg.add(var.set_rgb_order(config["rgb_order"]))
     cg.add(var.set_rmt_channel(config["rmt_channel"]))
-
