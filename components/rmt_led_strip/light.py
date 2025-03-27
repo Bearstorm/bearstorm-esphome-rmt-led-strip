@@ -1,19 +1,15 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import light
-from esphome.const import CONF_ID, CONF_PIN, CONF_NUM_LEDS, CONF_NAME
+from esphome.const import CONF_ID, CONF_NAME, CONF_NUM_LEDS, CONF_PIN
 
 from esphome import pins
 
-AUTO_LOAD = ["light"]
+AUTO_LOAD = ['light']
 CODEOWNERS = [""]
 
-rmt_led_strip_ns = cg.esphome_ns.namespace("rmt_led_strip")
-RMTLedStripLight = rmt_led_strip_ns.class_(
-    "RMTLedStripLight",
-    light.AddressableLightLightOutput,
-    cg.Component
-)
+rmt_led_strip_ns = cg.esphome_ns.namespace('rmt_led_strip')
+RMTLedStripLight = rmt_led_strip_ns.class_('RMTLedStripLight', light.AddressableLight)
 
 CONFIG_SCHEMA = light.ADDRESSABLE_LIGHT_SCHEMA.extend({
     cv.GenerateID(): cv.declare_id(RMTLedStripLight),
