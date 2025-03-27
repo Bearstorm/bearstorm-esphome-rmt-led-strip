@@ -10,6 +10,7 @@ namespace rmt_led_strip {
 class RMTLedStripLight : public light::AddressableLightLightOutput, public Component {
  public:
   void setup() override;
+  void write_state(light::LightState *state) override;
 
   void set_pin(GPIOPin *pin) { pin_ = pin; }
   void set_num_leds(uint16_t num_leds) { num_leds_ = num_leds; }
@@ -24,7 +25,6 @@ class RMTLedStripLight : public light::AddressableLightLightOutput, public Compo
   std::string rgb_order_;
   uint8_t rmt_channel_;
 };
-
 
 }  // namespace rmt_led_strip
 }  // namespace esphome
