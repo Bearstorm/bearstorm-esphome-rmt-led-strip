@@ -20,6 +20,7 @@ CONFIG_SCHEMA = light.ADDRESSABLE_LIGHT_SCHEMA.extend({
     cv.Optional("rmt_channel", default=0): cv.int_range(min=0, max=7),
 }).extend(cv.COMPONENT_SCHEMA)
 
+
 def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     yield light.register_light(var, config)
