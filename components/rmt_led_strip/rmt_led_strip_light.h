@@ -7,7 +7,7 @@
 namespace esphome {
 namespace rmt_led_strip {
 
-class RMTLedStripLight : public light::AddressableLight, public Component {
+class RMTLedStripLight : public light::AddressableLightLightOutput, public Component {
  public:
   void setup() override;
 
@@ -24,6 +24,7 @@ class RMTLedStripLight : public light::AddressableLight, public Component {
   std::string rgb_order_;
   uint8_t rmt_channel_;
 };
+
 
 }  // namespace rmt_led_strip
 }  // namespace esphome
