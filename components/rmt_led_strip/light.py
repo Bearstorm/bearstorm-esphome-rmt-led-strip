@@ -1,7 +1,7 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import light
-from esphome.const import CONF_ID, CONF_NAME, CONF_PIN, CONF_NUM_LEDS
+from esphome.const import CONF_ID, CONF_PIN, CONF_NUM_LEDS, CONF_NAME
 
 from esphome import pins
 
@@ -9,7 +9,11 @@ AUTO_LOAD = ["light"]
 CODEOWNERS = [""]
 
 rmt_led_strip_ns = cg.esphome_ns.namespace("rmt_led_strip")
-RMTLedStripLight = rmt_led_strip_ns.class_("RMTLedStripLight", light.AddressableLight, cg.Component)
+RMTLedStripLight = rmt_led_strip_ns.class_(
+    "RMTLedStripLight",
+    light.AddressableLightLightOutput,
+    cg.Component
+)
 
 CONFIG_SCHEMA = light.ADDRESSABLE_LIGHT_SCHEMA.extend({
     cv.GenerateID(): cv.declare_id(RMTLedStripLight),
@@ -22,11 +26,12 @@ CONFIG_SCHEMA = light.ADDRESSABLE_LIGHT_SCHEMA.extend({
 
 async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
-    await light.register_light(var, config)
     await cg.register_component(var, config)
+    await light.register_light(var, config)
 
     pin = await cg.gpio_pin_expression(config[CONF_PIN])
     cg.add(var.set_pin(pin))
+
     cg.add(var.set_num_leds(config[CONF_NUM_LEDS]))
     cg.add(var.set_chipset(config["chipset"]))
     cg.add(var.set_rgb_order(config["rgb_order"]))
